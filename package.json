@@ -2,8 +2,8 @@
   "name": "wasmsample",
   "version": "0.0.0",
   "scripts": {
-    "prestart": "cp -R ./node_modules/@privateid/cryptonets-web-sdk-alpha/wasm src/&& cp -R ./node_modules/@privateid/cryptonets-web-sdk-alpha/workers src/",
-    "postinstall": "cp -R ./node_modules/@privateid/cryptonets-web-sdk-alpha/wasm src/ && cp -R ./node_modules/@privateid/cryptonets-web-sdk-alpha/workers src/",
+    "prestart": "cp -R ./node_modules/@privateid/cryptonets-web-sdk/wasm src/&& cp -R ./node_modules/@privateid/cryptonets-web-sdk/workers src/",
+    "postinstall": "cp -R ./node_modules/@privateid/cryptonets-web-sdk/wasm src/ && cp -R ./node_modules/@privateid/cryptonets-web-sdk/workers src/",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -20,7 +20,8 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "@privateid/cryptonets-web-sdk-alpha": "file:/Users/sjuneja/Desktop/MyProjects/PrivIDFHEModules",
+    "@privateid/cryptonets-web-sdk": "3.0.3",
+    "ng-process-env": "^16.0.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

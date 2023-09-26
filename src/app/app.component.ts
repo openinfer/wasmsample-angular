@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CameraService } from 'src/hooks/useCamera';
-import { CameraFaceMode } from '@privateid/cryptonets-web-sdk-alpha/dist/types';
+import { CameraFaceMode } from '@privateid/cryptonets-web-sdk/dist/types';
 import { ScanBackDocumentService } from 'src/hooks/useScanBackDocument';
 import { WasmService } from 'src/hooks/useWasm';
 import {
@@ -10,9 +10,10 @@ import {
   frontDocumentStatusMessage,
   WIDTH_TO_STANDARDS,
 } from 'src/utils';
-import { closeCamera } from '@privateid/cryptonets-web-sdk-alpha';
+import { closeCamera } from '@privateid/cryptonets-web-sdk';
 import { ScanFrontDocumentService } from 'src/hooks/useScanFrontDocumentWithoutPredict';
 import { IsValidService } from 'src/hooks/useIsValid';
+import { switchCamera } from '../../../privIDFHEModules';
 
 interface Device {
   value: number;
@@ -86,6 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.devices = devices;
         this.selectedCamera = devices[0]?.value;
         this.initialCanvasSize = canvasSizeOptions?.[0]?.value;
+        console.log({ selectedCamera: devices[0]?.value, devices: devices });
       }
     );
     this.cameraReadySubscription = this.cameraService.cameraFeatures$.subscribe(
@@ -136,6 +138,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.isvalidStatus = data;
       }
     );
+
   }
 
   ngOnDestroy() {
@@ -200,6 +203,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onCameraChange(e: any) {
     this.selectedCamera = e?.target?.value;
+    switchCamera(null, e?.target?.value);
   }
 
   onMugshotImage() {

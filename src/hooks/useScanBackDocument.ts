@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   convertCroppedImage,
   isValidPhotoID,
-} from '@privateid/cryptonets-web-sdk-alpha';
+} from '@privateid/cryptonets-web-sdk';
 import { BehaviorSubject } from 'rxjs';
 import { CANVAS_SIZE } from '../utils';
 
@@ -39,6 +39,7 @@ export class ScanBackDocumentService {
 
   private documentCallback = (result: any) => {
     if (result.status === 'WASM_RESPONSE') {
+      console.log(result);
       this.barcodeStatusCode = result.returnValue.op_status;
       this.barcodeStatusCodeSubject.next(result.returnValue.op_status);
       if (result.returnValue.op_status === 0) {

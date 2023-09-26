@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { isValid } from '@privateid/cryptonets-web-sdk-alpha';
+import { isValid } from '@privateid/cryptonets-web-sdk';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { openCamera } from '@privateid/cryptonets-web-sdk-alpha';
-import { CameraFaceMode } from '@privateid/cryptonets-web-sdk-alpha/dist/types';
+import { openCamera } from '@privateid/cryptonets-web-sdk';
+import { CameraFaceMode } from '@privateid/cryptonets-web-sdk/dist/types';
 import { isIphoneCC, mapDevices } from 'src/utils';
 
 @Injectable({
@@ -9,7 +9,9 @@ import { isIphoneCC, mapDevices } from 'src/utils';
 })
 export class CameraService {
   public readySubject = new BehaviorSubject<boolean>(false);
-  private devicesSubject = new BehaviorSubject<Array<{ label: string; value: string }>>([]);
+  private devicesSubject = new BehaviorSubject<
+    Array<{ label: string; value: string }>
+  >([]);
   private deviceSubject = new BehaviorSubject<string>('');
   private faceModeSubject = new BehaviorSubject<any>(null);
   private cameraFeaturesSubject = new BehaviorSubject<any>({});
@@ -28,7 +30,7 @@ export class CameraService {
     isDocumentScan = false
   ) {
     if (this.readySubject.value) return;
-    
+
     try {
       const {
         devices = [],
@@ -50,7 +52,7 @@ export class CameraService {
 
       this.cameraFeaturesSubject.next({ settings, capabilities });
       this.faceModeSubject.next(faceMode);
-      
+
       if (Array.isArray(devices) && devices?.length > 0) {
         const options = devices?.map(mapDevices);
         this.devicesSubject.next(options);
@@ -73,7 +75,9 @@ export class CameraService {
     const video = document.getElementById('userVideo') as HTMLVideoElement;
     const mediaStream = video.srcObject as MediaStream;
     const track = await mediaStream.getTracks()[0];
-    const capabilities = track.getCapabilities() ? track.getCapabilities() : null;
+    const capabilities = track.getCapabilities()
+      ? track.getCapabilities()
+      : null;
 
     if (
       capabilities &&
